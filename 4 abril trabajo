@@ -1,0 +1,47 @@
+##vemos como se comporta anualmente la serie de tiempo con seasonplot
+seasonplot(LIVER, s=12, year.labels=TRUE, main="Valor acciones liverpool", ylab="valor de cierre", col=rainbow(13), year.labels.left=TRUE,pch=7) ##grafica de temporalidad
+monthplot(LIVER,main="Valor acciones liverpool", ylab="valor de cierre", col=rainbow(13), year.labels.left=TRUE,pch=7) ##para graficar mensualmente
+##Correlación y Covarianza relación lineal entre dos variables (y Y x) 
+##autocovarianza y autocorrelacion: relación lineal entre los valores retardados
+##de una serie de tiempo y se mide la relación entre: y and yt-1 para 
+##desestacionalizar y eliminar la tendencia necesitamos conocer la correlación 
+##de las variables para realizar mejores pronosticos en muchos casos las 
+##variables estan correlacionadas entonces si nosotros logramos identificar la 
+##correlación podemos mejorar los pronosticos si las correlaciones son altas 
+##para la ST observada para obtener la covarianza: cov(x,y)= suma(xi- x(media))(yi-y(media)))/(n-1) 
+##cor(x,y)=cov(x,y)/sd(x)sd(y)
+x<- mean(LIVER)
+y<- mean(WALMEX)
+n<- length(LIVER1)
+cova<- sum(((LIVER-x)*(WALMEX-y))/(n-1))
+cova
+corre<-cova/(sd(LIVER)*sd(ICATS))
+corre
+cov(LIVER1,WALMEX1)
+cor(LIVER1,WALMEX1)
+seasonplot(ICATS, s=12, year.labels=TRUE, main="Valor acciones ICA", ylab="valor de cierre", col=rainbow(13), year.labels.left=TRUE,pch=7) ##grafica de temporalidad
+##Los años 2002 a 2004 se mantuvieron constantes pero manteniendose a la baja, no fueron ciclicas
+seasonplot(WALMEX, s=12, year.labels=TRUE, main="Valor acciones WALMEX", ylab="valor de cierre", col=rainbow(13), year.labels.left=TRUE,pch=7) ##grafica de temporalidad
+##2014,2007,2012 notamos que a principio de año tieden a la baja al igual que a final de año y a mediados se matiene un comportamiento a la alza, es ciclico y tiene tendencia 
+seasonplot(LIVER, s=12, year.labels=TRUE, main="Valor acciones liverpool", ylab="valor de cierre", col=rainbow(13), year.labels.left=TRUE,pch=7) ##grafica de temporalidad
+##podemos notar que los años 2012,2013 y 2014 presentan una tendencia parecida manteniendose constante en todos los meses por lo que no se tiene una estacionalidad ni es ciclica
+ICA1<-window(ICATS, start=c(2003,1), end=c(2016,3))
+LIVER1<-window(LIVER, start=c(2003,1), end=c(2016,3))
+WALMEX1<-window(WALMEX, start=c(2003,1), end=c(2016,3))
+cov1<-sum((LIVER1-mean(LIVER1)*(ICA1-mean(ICA1)))/(n-1))
+cor1<-cov1/(sd(LIVER1)*sd(ICA1))
+cov(LIVER1,ICA1)
+cor(LIVER1,ICA1)
+cov2<-sum((WALMEX1-mean(WALMEX1)*(ICA1-mean(ICA1)))/(n-1))
+cor2<-cov1/(sd(WALMEX1)*sd(ICA1))
+cov(WALMEX1,ICA1)
+cor(WALMEX1,ICA1)
+x<- mean(LIVER)
+y<- mean(WALMEX)
+n<- length(LIVER1)
+cova<- sum(((LIVER-x)*(WALMEX-y))/(n-1))
+cova
+corre<-cova/(sd(LIVER)*sd(ICATS))
+corre
+cov(LIVER1,WALMEX1)
+cor(LIVER1,WALMEX1)
